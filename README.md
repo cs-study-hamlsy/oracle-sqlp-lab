@@ -4,6 +4,8 @@ SQLP 자격증 준비를 위한 Oracle 실습 저장소입니다.
 
 C, PRO-C, ORACLE을 중심으로 실습하고, 교재별 파트/주제 단위로 학습 내용을 정리합니다.
 
+실습용 Oracle DB는 로컬 컴퓨터에서 Docker 컨테이너로 실행하는 것을 기본 전제로 합니다.
+
 ## 목표
 
 - SQLP 대비를 위한 Oracle 성능, 튜닝, SQL 실습 기록
@@ -15,6 +17,7 @@ C, PRO-C, ORACLE을 중심으로 실습하고, 교재별 파트/주제 단위로
 - C
 - PRO-C
 - ORACLE
+- Docker
 
 ## 학습 순서
 
@@ -88,6 +91,7 @@ oracle-sqlp-lab/
 - C는 OCI 예제를 기준으로 연결합니다.
 - PRO-C는 `EXEC SQL CONNECT` 예제를 기준으로 연결합니다.
 - 계정 정보는 환경변수로 주입합니다.
+- Oracle DB는 로컬 Docker 컨테이너에 접속하는 것을 기본으로 합니다.
 
 사용 환경변수:
 
@@ -100,6 +104,18 @@ oracle-sqlp-lab/
 - `ORACLE_USER=scott`
 - `ORACLE_PASSWORD=tiger`
 - `ORACLE_CONNECT_STRING=localhost:1521/XEPDB1`
+
+## 로컬 Docker Oracle 운영 전제
+
+- Oracle DB는 로컬 Docker 컨테이너로 실행합니다.
+- 애플리케이션 및 실습 코드는 `localhost` 기준으로 접속합니다.
+- 포트, 서비스명, 계정은 사용하는 이미지 설정에 맞춰 주제별 README에 기록합니다.
+
+예시:
+
+- 호스트: `localhost`
+- 포트: `1521`
+- 서비스명: `XEPDB1`
 
 ## 실습 기록 권장 항목
 
