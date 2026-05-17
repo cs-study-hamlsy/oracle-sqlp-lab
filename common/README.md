@@ -2,7 +2,7 @@
 
 프로젝트 전체에서 재사용할 Oracle DB 연결 예제를 모아둔 디렉터리입니다.
 
-기본 전제는 로컬 컴퓨터에서 Docker로 Oracle DB를 띄우고, 각 실습 코드가 그 컨테이너로 접속하는 방식입니다.
+기본 전제는 로컬 컴퓨터에서 이미 실행 중인 Docker Oracle DB 컨테이너에 각 실습 코드가 접속하는 방식입니다.
 
 ## 구성
 
@@ -29,9 +29,9 @@ common/
 아래 환경변수를 사용합니다.
 
 ```powershell
-$env:ORACLE_USER="scott"
-$env:ORACLE_PASSWORD="tiger"
-$env:ORACLE_CONNECT_STRING="localhost:1521/XEPDB1"
+$env:ORACLE_USER="system"
+$env:ORACLE_PASSWORD="oracle"
+$env:ORACLE_CONNECT_STRING="localhost:8521/FREEPDB1"
 ```
 
 Docker 기반 로컬 접속 기준 예시입니다.
@@ -48,21 +48,24 @@ echo $env:ORACLE_CONNECT_STRING
 - `common/c/oci_connect.c`는 OCI 기반 연결 샘플입니다.
 - Oracle Client / Instant Client와 OCI 헤더 및 라이브러리가 필요합니다.
 - 교재별 C 실습에서 공통 함수로 복사하거나 include해서 사용할 수 있습니다.
-- 접속 대상은 로컬 Docker Oracle 컨테이너를 기준으로 합니다.
+- 접속 대상은 로컬에서 이미 실행 중인 Docker Oracle 컨테이너입니다.
 
 ## PRO-C 연결 방식
 
 - `common/pro-c/proc_connect.pc`는 PRO-C 연결 샘플입니다.
 - `EXEC SQL CONNECT`와 `sqlca` 상태 확인 흐름을 포함합니다.
 - 교재별 PRO-C 실습의 시작점으로 사용하면 됩니다.
-- 접속 대상은 로컬 Docker Oracle 컨테이너를 기준으로 합니다.
+- 접속 대상은 로컬에서 이미 실행 중인 Docker Oracle 컨테이너입니다.
 
 ## Docker 운영 메모
 
-- 컨테이너 포트는 일반적으로 `1521:1521` 형태로 매핑합니다.
+- 현재 프로젝트 기본 포트 매핑은 `8521:1521`입니다.
 - 실습 코드에서는 컨테이너 이름보다 `localhost` 접속을 우선 사용합니다.
+- 이 저장소는 Docker 컨테이너를 직접 생성하거나 관리하지 않습니다.
 - 이미지별 기본 서비스명 또는 SID가 다를 수 있으므로 실제 값은 주제 README에 함께 기록하는 것을 권장합니다.
-- 샘플 기본값은 `localhost:1521/XEPDB1`입니다.
+- 현재 샘플 기본값은 `localhost:8521/FREEPDB1`입니다.
+- Oracle Free 기본 서비스는 `FREE`와 `FREEPDB1`이며, 실습용 기본 연결은 `FREEPDB1`를 사용합니다.
+- `ORACLE_PWD=oracle`로 컨테이너를 생성했으므로 초기 비밀번호 예시는 `oracle`입니다.
 
 ## 사용 권장 방식
 
