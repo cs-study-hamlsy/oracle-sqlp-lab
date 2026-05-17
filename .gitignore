@@ -1,0 +1,26 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# C build artifacts
+*.o
+*.obj
+*.out
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+
+# Oracle / PRO-C generated artifacts
+*.lis
+*.log
+*.pcd
+*.cob
+
+# Temporary files
+*.tmp
+*.temp
+*.bak

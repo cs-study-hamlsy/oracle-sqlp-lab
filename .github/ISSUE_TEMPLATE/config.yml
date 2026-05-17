@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 학습 구조 문의
+    url: https://github.com/
+    about: 저장소 운영 규칙이나 학습 구조 관련 메모가 필요하면 PR 또는 문서로 정리합니다.
