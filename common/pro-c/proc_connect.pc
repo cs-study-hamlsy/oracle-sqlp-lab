@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "../include/oracle_db_config.h"
+
+EXEC SQL INCLUDE SQLCA;
+
+static const char *read_env_or_default(const char *name, const char *default_value)
+{
+    const char *value = getenv(name);
+
+    if (value == NULL || value[0] == '\0') {
+        return default_value;
+    }
+
+    return value;
+}
+
+static void copy_to_varchar(VARCHAR *target, const char *source, size_t max_len)
+{
+    size_t length = strlen(source);
+
+    if (length > max_len) {
+        length = max_len;
+    }
+
+    memcpy(target->arr, source, length);
+    target->len = (unsigned short) length;
+}
+
+static void print_sql_error(const char *message)
+{
+    fprintf(stderr, "%s\n", message);
+    fprintf(stderr, "SQLCODE: %ld\n", sqlca.sqlcode);
+    fprintf(stderr, "SQLERRM: %.*s\n", sqlca.sqlerrm.sqlerrml, sqlca.sqlerrm.sqlerrmc);
+}
+
+int main(void)
+{
+    const char *env_user = read_env_or_default(ORACLE_ENV_USER, NULL);
+    const char *env_password = read_env_or_default(ORACLE_ENV_PASSWORD, NULL);
+    const char *env_connect_string = read_env_or_default(
+        ORACLE_ENV_CONNECT_STRING,
+        ORACLE_DEFAULT_CONNECT_STRING
+    );
+
+    EXEC SQL BEGIN DECLARE SECTION;
+        VARCHAR username[ORACLE_USER_MAX_LEN + 1];
+        VARCHAR password[ORACLE_PASSWORD_MAX_LEN + 1];
+        VARCHAR connect_string[ORACLE_CONNECT_STRING_MAX_LEN + 1];
+    EXEC SQL END DECLARE SECTION;
+
+    if (env_user == NULL || env_password == NULL) {
+        fprintf(stderr, "Set ORACLE_USER and ORACLE_PASSWORD before running.\n");
+        return 1;
+    }
+
+    copy_to_varchar(&username, env_user, ORACLE_USER_MAX_LEN);
+    copy_to_varchar(&password, env_password, ORACLE_PASSWORD_MAX_LEN);
+    copy_to_varchar(&connect_string, env_connect_string, ORACLE_CONNECT_STRING_MAX_LEN);
+
+    EXEC SQL WHENEVER SQLERROR DO print_sql_error("Oracle connect failed.");
+
+    EXEC SQL CONNECT :username IDENTIFIED BY :password USING :connect_string;
+
+    if (sqlca.sqlcode != 0) {
+        print_sql_error("Oracle connect failed.");
+        return 1;
+    }
+
+    printf("Connected to Oracle with PRO-C: %s\n", env_connect_string);
+
+    EXEC SQL COMMIT WORK RELEASE;
+
+    if (sqlca.sqlcode != 0) {
+        print_sql_error("Oracle disconnect failed.");
+        return 1;
+    }
+
+    printf("Disconnected from Oracle.\n");
+    return 0;
+}

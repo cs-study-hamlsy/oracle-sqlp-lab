@@ -31,6 +31,15 @@ oracle-sqlp-lab/
 │  │  ├─ config.yml
 │  │  └─ study-task.md
 │  └─ pull_request_template.md
+├─ common/
+│  ├─ README.md
+│  ├─ include/
+│  │  └─ oracle_db_config.h
+│  ├─ c/
+│  │  ├─ oci_connect.c
+│  │  └─ oci_connect.h
+│  └─ pro-c/
+│     └─ proc_connect.pc
 ├─ templates/
 │  └─ topic-template/
 │     ├─ README.md
@@ -72,6 +81,25 @@ oracle-sqlp-lab/
   - `README.md`: 학습 내용, 실행 방법, 트러블슈팅, 참고 사항
   - `c/`: C 실습 코드
   - `pro-c/`: PRO-C 실습 코드
+
+## 공통 Oracle 연결 코드
+
+- 프로젝트 공통 연결 샘플은 [common/README.md](/C:/oracle-sqlp-lab/common/README.md)에 정리했습니다.
+- C는 OCI 예제를 기준으로 연결합니다.
+- PRO-C는 `EXEC SQL CONNECT` 예제를 기준으로 연결합니다.
+- 계정 정보는 환경변수로 주입합니다.
+
+사용 환경변수:
+
+- `ORACLE_USER`
+- `ORACLE_PASSWORD`
+- `ORACLE_CONNECT_STRING`
+
+예시 값:
+
+- `ORACLE_USER=scott`
+- `ORACLE_PASSWORD=tiger`
+- `ORACLE_CONNECT_STRING=localhost:1521/XEPDB1`
 
 ## 실습 기록 권장 항목
 
