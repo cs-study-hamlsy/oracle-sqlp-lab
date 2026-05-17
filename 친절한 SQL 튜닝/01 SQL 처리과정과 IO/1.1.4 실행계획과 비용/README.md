@@ -26,7 +26,6 @@
 - `ORACLE_USER`, `ORACLE_PASSWORD`, `ORACLE_CONNECT_STRING` 환경변수가 설정되어 있어야 한다.
 - `SCOTT.EMP` 테이블이 존재해야 한다.
 - `DBMS_XPLAN` 사용이 가능해야 한다.
-- `AUTOTRACE`를 쓰려면 SQL*Plus 또는 SQLcl 환경이 필요하다.
 
 권장 환경변수 예시:
 
@@ -150,75 +149,19 @@ and no between 1 and 100;
 
 ## 테스트 절차
 
-이 주제는 세 가지 방식으로 점검할 수 있다.
+이 주제는 SQL 스크립트와 PRO-C를 따로 나누지 않고, [pro-c/plan_test.pc](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/01%20SQL%20처리과정과%20IO/1.1.4%20실행계획과%20비용/pro-c/plan_test.pc) 하나에 실습용 쿼리를 직접 넣어 진행한다.
 
-1. SQL*Plus/SQLcl에서 `AUTOTRACE`
-2. SQL*Plus/SQLcl에서 `EXPLAIN PLAN` + `DBMS_XPLAN.DISPLAY`
-3. PRO-C 프로그램에서 동일 실습 재현
+즉, 저장소에서 사람이 관리하는 실행 소스는 `plan_test.pc` 하나이고, `proc`가 만들어내는 `plan_test.c`는 빌드 과정에서만 생기는 산출물이다.
 
-### 방법 1. AUTOTRACE
+`plan_test.pc` 안에는 아래 SQL이 모두 포함되어 있다.
 
-`AUTOTRACE`는 가장 빠른 미리보기 방법이다.
+- 테스트 테이블 `T` 생성 SQL
+- 인덱스 `T_X01`, `T_X02` 생성 SQL
+- `DBMS_STATS.GATHER_TABLE_STATS` 호출
+- 기본 SQL, `INDEX(t t_x02)` 힌트 SQL, `FULL(t)` 힌트 SQL
+- `EXPLAIN PLAN`과 `DBMS_XPLAN.DISPLAY` 조회 로직
 
-실행 파일:
-
-- [sql/02_autotrace_tests.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/01%20SQL%20처리과정과%20IO/1.1.4%20실행계획과%20비용/sql/02_autotrace_tests.sql)
-
-실행 예시:
-
-```bash
-sqlplus system/oracle@localhost:8521/FREEPDB1 @sql/01_setup.sql
-sqlplus system/oracle@localhost:8521/FREEPDB1 @sql/02_autotrace_tests.sql
-```
-
-확인 포인트:
-
-- 어떤 인덱스를 사용했는가
-- 비용이 얼마인가
-- 기본 SQL과 힌트 SQL의 차이가 무엇인가
-
-### 방법 2. EXPLAIN PLAN + DBMS_XPLAN
-
-`AUTOTRACE` 권한이 없거나, 결과를 더 명시적으로 분리해서 보고 싶다면 이 방식을 사용한다.
-
-실행 파일:
-
-- [sql/01_setup.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/01%20SQL%20처리과정과%20IO/1.1.4%20실행계획과%20비용/sql/01_setup.sql)
-- [sql/03_explain_plan_tests.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/01%20SQL%20처리과정과%20IO/1.1.4%20실행계획과%20비용/sql/03_explain_plan_tests.sql)
-
-실행 예시:
-
-```bash
-sqlplus system/oracle@localhost:8521/FREEPDB1 @sql/01_setup.sql
-sqlplus system/oracle@localhost:8521/FREEPDB1 @sql/03_explain_plan_tests.sql
-```
-
-이 방식은 `statement_id`별로 실행계획을 분리해서 보기 좋다.
-
-### 방법 3. PRO-C
-
-실행 파일:
-
-- PRO-C: [pro-c/plan_test.pc](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/01%20SQL%20처리과정과%20IO/1.1.4%20실행계획과%20비용/pro-c/plan_test.pc)
-
-이 주제는 SQL 실행과 실행계획 확인이 중심이기 때문에, 별도 C 실행 파일을 유지하지 않고 PRO-C를 주 실행 소스로 사용한다.
-
-즉, 이 파트에서의 역할은 아래처럼 정리한다.
-
-- `plan_test.pc`: 사람이 관리하는 실습 소스
-- `proc` 전처리 결과물인 `plan_test.c`: 빌드 과정에서 생성되는 산출물
-- 최종 실행 파일: 전처리된 C를 컴파일한 실행 파일
-
-따라서 저장소에서는 PRO-C 원본만 관리하고, 생성된 C 파일은 실습 과정에서 로컬에서 만들어 사용한다.
-
-PRO-C 프로그램은 아래를 수행한다.
-
-- 테이블/인덱스 생성
-- 통계정보 수집
-- `EXPLAIN PLAN`
-- `DBMS_XPLAN.DISPLAY` 출력
-
-#### PRO-C 실행 방식
+### PRO-C 실행 방식
 
 전제:
 
@@ -242,7 +185,7 @@ proc_plan_test.exe
 
 운영체제, Oracle Client 설치 경로, 컴파일러에 따라 실제 옵션은 달라질 수 있다. 따라서 이 README의 목적은 "어떤 순서로 실행하는가"를 안내하는 것이고, 링크 옵션은 로컬 환경에 맞게 조정해야 한다.
 
-정리하면 이 파트는 "PRO-C 하나를 작성하고, 그 PRO-C를 C로 전처리한 뒤 컴파일해서 실행"하는 구조다. 따라서 C와 PRO-C를 각각 별도 실습 파일로 따로 운영하지 않는다.
+정리하면 이 파트는 "PRO-C 하나를 작성하고, 그 안에 실습 SQL을 직접 넣은 뒤, C로 전처리하고 컴파일해서 실행"하는 구조다. 따라서 SQL 파일과 PRO-C 파일을 별도로 나누어 운영하지 않는다.
 
 ## 점검 체크리스트
 
@@ -258,12 +201,11 @@ proc_plan_test.exe
 
 - `SCOTT.EMP`가 없으면 테이블 생성이 실패한다.
 - `PLAN_TABLE` 또는 `DBMS_XPLAN` 환경이 없으면 실행계획 조회가 실패할 수 있다.
-- `AUTOTRACE`는 SQL*Plus/SQLcl 기능이라 C/PRO-C만으로는 그대로 대체되지 않는다.
 - `SYSTEM` 계정으로 실습하면 오브젝트 관리가 지저분해질 수 있으므로 전용 실습 계정이 더 적합하다.
 
 ## 추천 실행 순서
 
-1. SQL*Plus/SQLcl에서 `01_setup.sql` 실행
-2. `02_autotrace_tests.sql`로 빠르게 실행계획 비교
-3. 필요하면 `03_explain_plan_tests.sql`로 `DBMS_XPLAN` 결과 확인
-4. 마지막으로 PRO-C 예제를 전처리하고 실행해 코드에서 같은 작업을 어떻게 수행하는지 확인
+1. `ORACLE_USER`, `ORACLE_PASSWORD`, `ORACLE_CONNECT_STRING` 환경변수를 설정한다.
+2. `proc iname=pro-c/plan_test.pc`로 PRO-C를 전처리한다.
+3. 생성된 `plan_test.c`를 컴파일해 실행 파일을 만든다.
+4. 실행 파일을 돌려 테이블 생성, 통계정보 수집, 실행계획 비교를 한 번에 확인한다.
