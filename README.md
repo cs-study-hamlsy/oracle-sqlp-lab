@@ -35,8 +35,12 @@ oracle-sqlp-lab/
 │  └─ pull_request_template.md
 ├─ common/
 │  ├─ README.md
+│  ├─ oracle.env
 │  ├─ include/
 │  │  └─ oracle_db_config.h
+│  ├─ scripts/
+│  │  ├─ Import-OracleEnv.ps1
+│  │  └─ Invoke-WithOracleEnv.ps1
 │  ├─ c/
 │  │  ├─ oci_connect.c
 │  │  └─ oci_connect.h
@@ -89,7 +93,7 @@ oracle-sqlp-lab/
 - 프로젝트 공통 연결 샘플은 [common/README.md](/C:/oracle-sqlp-lab/common/README.md)에 정리했습니다.
 - C는 OCI 예제를 기준으로 연결합니다.
 - PRO-C는 `EXEC SQL CONNECT` 예제를 기준으로 연결합니다.
-- 계정 정보는 환경변수로 주입합니다.
+- 계정 정보는 `common/oracle.env`에서 공통 관리하고, 각 실행 스크립트가 이를 로드합니다.
 - Oracle DB는 로컬에서 이미 실행 중인 Docker 컨테이너에 접속하는 것을 기본으로 합니다.
 
 사용 환경변수:
@@ -103,6 +107,20 @@ oracle-sqlp-lab/
 - `ORACLE_USER=system`
 - `ORACLE_PASSWORD=oracle`
 - `ORACLE_CONNECT_STRING=localhost:8521/FREEPDB1`
+
+권장 실행 흐름:
+
+1. 각 주제 폴더의 `run.ps1` 또는 개별 실행 스크립트에서 `common/scripts/Import-OracleEnv.ps1`를 호출합니다.
+2. 그 다음 해당 폴더의 Pro*C 또는 C 실행 파일을 실행합니다.
+3. 프로그램 내부에서 `CONNECT`가 수행됩니다.
+
+## VS Code 실행 방식
+
+- 기본 실행 단위는 개별 `.pc` 파일이 아니라 주제 폴더의 `run.ps1`입니다.
+- PRO-C 주제는 `run.ps1`에서 `proc -> C 컴파일 -> exe 실행`까지 한 번에 처리합니다.
+- VS Code에서는 파일을 연 상태에서 `Ctrl + Shift + B`를 누르면 가장 가까운 상위 폴더의 `run.ps1`를 찾아 실행합니다.
+- 루트 [.vscode/tasks.json](/C:/oracle-sqlp-lab/.vscode/tasks.json)에 이 동작이 등록되어 있습니다.
+- 주제별로 컴파일 옵션이 다르면 해당 주제의 `run.ps1`에서만 조정합니다.
 
 ## 로컬 Docker Oracle 운영 전제
 

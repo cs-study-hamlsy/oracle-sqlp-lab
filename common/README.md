@@ -9,8 +9,12 @@
 ```text
 common/
 ├─ README.md
+├─ oracle.env
 ├─ include/
 │  └─ oracle_db_config.h
+├─ scripts/
+│  ├─ Import-OracleEnv.ps1
+│  └─ Invoke-WithOracleEnv.ps1
 ├─ c/
 │  ├─ oci_connect.c
 │  └─ oci_connect.h
@@ -24,6 +28,13 @@ common/
 - 계정 정보 하드코딩 방지
 - C / PRO-C 연결 방식의 기본 골격 통일
 
+## 공통 연결 방식
+
+- DB 접속 정보는 `common/oracle.env` 한 곳에서 관리합니다.
+- 각 실습 폴더의 실행 스크립트는 `common/scripts/Import-OracleEnv.ps1`를 먼저 호출해 환경변수를 로드합니다.
+- 실제 Oracle 세션 연결은 각 C / PRO-C 프로그램이 실행되면서 내부에서 수행합니다.
+- 즉, "미리 외부에서 DB 세션을 열어두는 방식"이 아니라 "실행 전에 env를 준비하고, 프로그램 안에서 CONNECT 하는 방식"입니다.
+
 ## 환경변수
 
 아래 환경변수를 사용합니다.
@@ -34,6 +45,8 @@ $env:ORACLE_PASSWORD="oracle"
 $env:ORACLE_CONNECT_STRING="localhost:8521/FREEPDB1"
 ```
 
+`common/oracle.env` 기본값도 동일하게 `localhost:8521/FREEPDB1`를 사용합니다.
+
 Docker 기반 로컬 접속 기준 예시입니다.
 
 설정 확인 예시:
@@ -42,6 +55,26 @@ Docker 기반 로컬 접속 기준 예시입니다.
 echo $env:ORACLE_USER
 echo $env:ORACLE_CONNECT_STRING
 ```
+
+## PowerShell 공통 로더
+
+현재 프로젝트 기본 실행 방식은 PowerShell 기준입니다.
+
+실습 폴더의 실행 파일에서는 아래 둘 중 하나를 사용하면 됩니다.
+
+1. 현재 셸에 env만 로드
+
+```powershell
+& "C:\oracle-sqlp-lab\common\scripts\Import-OracleEnv.ps1"
+```
+
+2. env를 로드한 뒤 바로 프로그램 실행
+
+```powershell
+& "C:\oracle-sqlp-lab\common\scripts\Invoke-WithOracleEnv.ps1" -ExecutablePath .\proc_plan_test.exe
+```
+
+주제 폴더 안에 `run.ps1` 같은 실행 스크립트를 둘 경우, 그 스크립트 안에서 `Import-OracleEnv.ps1`를 먼저 호출하는 패턴을 권장합니다.
 
 ## C 연결 방식
 
@@ -70,8 +103,9 @@ echo $env:ORACLE_CONNECT_STRING
 ## 사용 권장 방식
 
 1. 공통 예제를 먼저 확인합니다.
-2. 주제 폴더의 `c/` 또는 `pro-c/`로 복사해 실습 목적에 맞게 수정합니다.
-3. 주제별 `README.md`에 접속 정보 형식, 실행 방법, 결과를 기록합니다.
+2. 주제 폴더의 실행 스크립트에서 `common/scripts/Import-OracleEnv.ps1`를 먼저 호출합니다.
+3. 주제 폴더의 `c/` 또는 `pro-c/`로 복사해 실습 목적에 맞게 수정합니다.
+4. 주제별 `README.md`에 실행 방법, 결과, 특이한 접속 조건을 기록합니다.
 
 ## 주의 사항
 

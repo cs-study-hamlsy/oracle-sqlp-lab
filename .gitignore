@@ -3,6 +3,8 @@
 Thumbs.db
 .idea/
 .vscode/
+!.vscode/
+!.vscode/tasks.json
 
 # C build artifacts
 *.o

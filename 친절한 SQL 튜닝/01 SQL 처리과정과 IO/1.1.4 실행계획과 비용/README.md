@@ -23,16 +23,14 @@
 
 - Oracle DB는 로컬에서 이미 실행 중인 Docker 컨테이너에 떠 있어야 한다.
 - 기본 접속 예시는 `localhost:8521/FREEPDB1`이다.
-- `ORACLE_USER`, `ORACLE_PASSWORD`, `ORACLE_CONNECT_STRING` 환경변수가 설정되어 있어야 한다.
+- `common/scripts/Import-OracleEnv.ps1`로 `common/oracle.env`를 먼저 로드해야 한다.
 - `SCOTT.EMP` 테이블이 존재해야 한다.
 - `DBMS_XPLAN` 사용이 가능해야 한다.
 
 권장 환경변수 예시:
 
 ```powershell
-$env:ORACLE_USER="system"
-$env:ORACLE_PASSWORD="oracle"
-$env:ORACLE_CONNECT_STRING="localhost:8521/FREEPDB1"
+& "C:\oracle-sqlp-lab\common\scripts\Import-OracleEnv.ps1"
 ```
 
 다만 실제 실습은 `SYSTEM`보다 별도 실습 계정에서 진행하는 편이 안전하다. 이 README에서는 저장소의 기본 공통 설정값에 맞춰 설명하지만, 가능하면 `sqlp_lab` 같은 전용 계정을 따로 만들어 사용하는 것을 권장한다.
@@ -180,10 +178,12 @@ gcc -I%ORACLE_HOME%/precomp/public pro-c/plan_test.c -o proc_plan_test.exe
 실행:
 
 ```bash
-proc_plan_test.exe
+.\run.ps1
 ```
 
 운영체제, Oracle Client 설치 경로, 컴파일러에 따라 실제 옵션은 달라질 수 있다. 따라서 이 README의 목적은 "어떤 순서로 실행하는가"를 안내하는 것이고, 링크 옵션은 로컬 환경에 맞게 조정해야 한다.
+
+VS Code에서는 이 주제 폴더 안의 파일을 연 상태에서 `Ctrl + Shift + B`를 누르면 루트 task가 이 폴더의 `run.ps1`를 찾아 실행한다. 기존 `run-proc.ps1`도 남겨두었지만, 내부적으로는 `run.ps1`를 호출하는 호환용 진입점이다.
 
 정리하면 이 파트는 "PRO-C 하나를 작성하고, 그 안에 실습 SQL을 직접 넣은 뒤, C로 전처리하고 컴파일해서 실행"하는 구조다. 따라서 SQL 파일과 PRO-C 파일을 별도로 나누어 운영하지 않는다.
 
@@ -205,7 +205,7 @@ proc_plan_test.exe
 
 ## 추천 실행 순서
 
-1. `ORACLE_USER`, `ORACLE_PASSWORD`, `ORACLE_CONNECT_STRING` 환경변수를 설정한다.
+1. `common/scripts/Import-OracleEnv.ps1`로 `common/oracle.env`를 로드한다.
 2. `proc iname=pro-c/plan_test.pc`로 PRO-C를 전처리한다.
 3. 생성된 `plan_test.c`를 컴파일해 실행 파일을 만든다.
-4. 실행 파일을 돌려 테이블 생성, 통계정보 수집, 실행계획 비교를 한 번에 확인한다.
+4. `.\run.ps1`로 전처리, 컴파일, 실행을 한 번에 처리해 테이블 생성, 통계정보 수집, 실행계획 비교를 확인한다.

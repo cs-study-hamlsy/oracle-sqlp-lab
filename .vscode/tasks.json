@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run current topic",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$target='${file}'; if ([string]::IsNullOrWhiteSpace($target)) { throw 'Open a file inside a topic folder first.' }; $dir=Split-Path -Parent $target; while ($dir) { $candidate=Join-Path $dir 'run.ps1'; if (Test-Path -LiteralPath $candidate) { & $candidate; exit $LASTEXITCODE }; $parent=Split-Path -Parent $dir; if ($parent -eq $dir) { break }; $dir=$parent }; throw 'No run.ps1 found above the active file.'"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
