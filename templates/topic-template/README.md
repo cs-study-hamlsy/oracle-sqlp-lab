@@ -10,22 +10,23 @@
 
 ## 실행 순서
 
-1. `01_setup.sql`
-2. `02_baseline.sql`
-3. `03_comparison.sql`
-4. `04_practice.sql`
-5. 필요 시 `99_cleanup.sql`
+1. `sql/01_setup.sql`
+2. `sql/02_baseline.sql`
+3. `sql/03_comparison.sql`
+4. `sql/04_practice.sql`
+5. 필요 시 `sql/99_cleanup.sql`
 
 ## 디렉터리 구성
 
 ```text
 .
 ├─ README.md
-├─ 01_setup.sql
-├─ 02_baseline.sql
-├─ 03_comparison.sql
-├─ 04_practice.sql
-└─ 99_cleanup.sql
+└─ sql/
+   ├─ 01_setup.sql
+   ├─ 02_baseline.sql
+   ├─ 03_comparison.sql
+   ├─ 04_practice.sql
+   └─ 99_cleanup.sql
 ```
 
 ## 실습 환경
@@ -52,6 +53,11 @@
 ### 4. 직접 연습
 
 - 학습자가 스스로 실행계획과 튜닝 포인트를 설명해볼 문제를 적는다.
+
+## 폴더 배치 원칙
+
+- 이 템플릿은 반드시 `교재 > 파트 > 주제` 폴더 안에 복사해서 사용한다.
+- 새 실습은 교재 정체성이 보이도록 해당 교재 폴더 아래에 만든다.
 
 ## 관찰 결과
 
