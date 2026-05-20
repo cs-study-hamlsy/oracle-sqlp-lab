@@ -1,5 +1,9 @@
 # 1.1.5 옵티마이저 힌트
 
+> 현재 표준 실습 경로는 [labs/01-sql-processing-and-io/02-optimizer-hints/README.md](/C:/oracle-sqlp-lab/labs/01-sql-processing-and-io/02-optimizer-hints/README.md) 입니다.
+>
+> 이 폴더는 교재 출처와 이전 구조를 보존하는 아카이브입니다.
+
 이 주제는 "Oracle이 SQL을 어떤 길로 실행할지"에 대해 사람이 힌트를 주는 방법을 쉬운 예시로 익히는 실습이다.
 
 이번 실습에서는 아래처럼 익숙한 컬럼을 사용한다.

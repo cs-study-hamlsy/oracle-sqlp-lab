@@ -1,54 +1,67 @@
 # 주제명
 
-## 학습 목표
+## 실습 목적
 
 - 
 
-## 배경 / 개념
+## 핵심 개념
 
 - 
 
-## 실습 환경
+## 실행 순서
 
-- ORACLE:
-- C:
-- PRO-C:
+1. `01_setup.sql`
+2. `02_baseline.sql`
+3. `03_comparison.sql`
+4. `04_practice.sql`
+5. 필요 시 `99_cleanup.sql`
 
 ## 디렉터리 구성
 
 ```text
 .
 ├─ README.md
-├─ run.ps1
-├─ c/
-└─ pro-c/
+├─ 01_setup.sql
+├─ 02_baseline.sql
+├─ 03_comparison.sql
+├─ 04_practice.sql
+└─ 99_cleanup.sql
 ```
 
-## 실습 내용
+## 실습 환경
 
-### 1. C
+- Oracle SQL Developer 또는 SQL*Plus
+- 실습 계정:
+- 필요 권한:
+- 전제 오브젝트:
+
+## 실습 시나리오
+
+### 1. 준비
+
+- 어떤 테스트 데이터와 인덱스를 왜 만드는지 적는다.
+
+### 2. 기준 실행
+
+- 힌트 없이 어떤 실행계획이 나올지 관찰 포인트를 적는다.
+
+### 3. 비교 실험
+
+- 조건 변경, 힌트 적용, 인덱스 변경 등 비교 포인트를 적는다.
+
+### 4. 직접 연습
+
+- 학습자가 스스로 실행계획과 튜닝 포인트를 설명해볼 문제를 적는다.
+
+## 관찰 결과
 
 - 
 
-### 2. PRO-C
+## 해석 포인트
 
-- 
-
-## 실행 방법
-
-```bash
-.\run.ps1 -ExecutablePath .\your-program.exe
-```
-
-권장 패턴:
-
-- 각 주제 폴더에 `run.ps1` 또는 `run-proc.ps1`를 둡니다.
-- 그 스크립트 맨 앞에서 `common/scripts/Import-OracleEnv.ps1`를 호출합니다.
-- DB 접속은 프로그램 내부의 Oracle 연결 코드가 수행합니다.
-
-## 결과 / 관찰 내용
-
-- 
+- 왜 이런 실행계획이 나왔는지
+- 실무에서 무엇을 더 확인해야 하는지
+- SQLP 시험에서는 어떻게 판단하는지
 
 ## 트러블슈팅
 

@@ -5,6 +5,8 @@ Thumbs.db
 .vscode/
 !.vscode/
 !.vscode/tasks.json
+.vs/
+CppProperties.json
 
 # C build artifacts
 *.o

@@ -1,5 +1,9 @@
 # 1.1.4 실행계획과 비용
 
+> 현재 표준 실습 경로는 [labs/01-sql-processing-and-io/01-execution-plan-and-cost/README.md](/C:/oracle-sqlp-lab/labs/01-sql-processing-and-io/01-execution-plan-and-cost/README.md) 입니다.
+>
+> 이 폴더는 교재 출처와 이전 구조를 보존하는 아카이브입니다.
+
 이 파트는 실행계획을 "미리보기" 하면서, 같은 SQL이라도 옵티마이저가 어떤 접근 경로를 선택하는지 비교하는 실습이다.
 
 이번 실습의 핵심 질문은 아래 세 가지다.
