@@ -199,6 +199,8 @@ where deptno in (10, 20, 30)
   - OR Expansion, OR Expansion 실패 가능성, `INLIST ITERATOR`를 실행계획으로 확인한다.
 - [sql/04_practice.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.2.2%20인덱스를%20Range%20Scan할%20수%20없는%20이유/sql/04_practice.sql)
   - 직접 SQL을 바꿔 보며 Range Scan 가능 조건을 점검한다.
+- [sql/05_answer.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.2.2%20인덱스를%20Range%20Scan할%20수%20없는%20이유/sql/05_answer.sql)
+  - 연습 문제 정답과 SQL 재작성 방향을 확인한다.
 - [sql/99_cleanup.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.2.2%20인덱스를%20Range%20Scan할%20수%20없는%20이유/sql/99_cleanup.sql)
   - 실습 객체를 정리한다.
 
@@ -208,7 +210,8 @@ where deptno in (10, 20, 30)
 2. [sql/02_baseline.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.2.2%20인덱스를%20Range%20Scan할%20수%20없는%20이유/sql/02_baseline.sql)에서 `Predicate Information`을 중심으로 본다.
 3. [sql/03_comparison.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.2.2%20인덱스를%20Range%20Scan할%20수%20없는%20이유/sql/03_comparison.sql)에서 `CONCATENATION`, `INLIST ITERATOR`, `INDEX RANGE SCAN` 여부를 비교한다.
 4. [sql/04_practice.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.2.2%20인덱스를%20Range%20Scan할%20수%20없는%20이유/sql/04_practice.sql)에서 직접 SQL을 수정해 본다.
-5. 필요하면 [sql/99_cleanup.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.2.2%20인덱스를%20Range%20Scan할%20수%20없는%20이유/sql/99_cleanup.sql)로 정리한다.
+5. [sql/05_answer.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.2.2%20인덱스를%20Range%20Scan할%20수%20없는%20이유/sql/05_answer.sql)에서 정답 SQL과 실행계획을 비교한다.
+6. 필요하면 [sql/99_cleanup.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.2.2%20인덱스를%20Range%20Scan할%20수%20없는%20이유/sql/99_cleanup.sql)로 정리한다.
 
 ## 관찰 결과 해석 포인트
 

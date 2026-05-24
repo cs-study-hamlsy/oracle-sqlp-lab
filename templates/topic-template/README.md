@@ -45,6 +45,7 @@
 - `sql/02_baseline.sql`
 - `sql/03_comparison.sql`
 - `sql/04_practice.sql`
+- `sql/05_answer.sql`
 - 필요 시 `sql/99_cleanup.sql`
 
 ## 실행 순서
@@ -53,7 +54,8 @@
 2. `sql/02_baseline.sql`
 3. `sql/03_comparison.sql`
 4. `sql/04_practice.sql`
-5. 필요 시 `sql/99_cleanup.sql`
+5. `sql/05_answer.sql`
+6. 필요 시 `sql/99_cleanup.sql`
 
 ## 디렉터리 구성
 
@@ -65,6 +67,7 @@
    ├─ 02_baseline.sql
    ├─ 03_comparison.sql
    ├─ 04_practice.sql
+   ├─ 05_answer.sql
    └─ 99_cleanup.sql
 ```
 
@@ -77,8 +80,9 @@
 
 ## SQL Developer 실행 가이드
 
-- `sql/01_setup.sql`, `sql/02_*.sql`, `sql/03_*.sql`, `sql/99_cleanup.sql`은 보통 `F5`로 파일 전체 실행한다.
-- `sql/04_practice.sql`은 문제 안내용이므로, 예시 SQL을 복사해 별도 워크시트에서 수정하며 실험한다.
+- `sql/01_setup.sql`, `sql/02_*.sql`, `sql/03_*.sql`, `sql/05_answer.sql`, `sql/99_cleanup.sql`은 보통 `F5`로 파일 전체 실행한다.
+- `sql/04_practice.sql`은 문제 안내용이므로, 예시 SQL을 복사해 별도 워크시트에서 수정하며 먼저 실험한다.
+- `sql/05_answer.sql`은 직접 풀어본 뒤 비교하는 정답 스크립트이므로, 내 실행계획과 차이를 확인하는 용도로 사용한다.
 
 ## 관찰 결과
 

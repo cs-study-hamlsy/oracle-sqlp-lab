@@ -147,6 +147,8 @@ Oracle은 통계정보를 바탕으로 아래를 추정한다.
   - 조인 기준 `LEADING`, `USE_NL` 비교
 - [sql/04_practice.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/01%20SQL%20처리과정과%20IO/1.1.5%20옵티마이저%20힌트/sql/04_practice.sql)
   - 직접 해보는 문제
+- [sql/05_answer.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/01%20SQL%20처리과정과%20IO/1.1.5%20옵티마이저%20힌트/sql/05_answer.sql)
+  - 연습 문제 정답과 힌트 해설
 
 ## SQL Developer 실행 가이드
 
@@ -154,6 +156,7 @@ Oracle은 통계정보를 바탕으로 아래를 추정한다.
 2. [sql/02_hint_examples.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/01%20SQL%20처리과정과%20IO/1.1.5%20옵티마이저%20힌트/sql/02_hint_examples.sql) 파일을 열고 `F5`로 전체 실행합니다.
 3. [sql/03_join_hint_examples.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/01%20SQL%20처리과정과%20IO/1.1.5%20옵티마이저%20힌트/sql/03_join_hint_examples.sql) 파일을 열고 `F5`로 전체 실행합니다.
 4. [sql/04_practice.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/01%20SQL%20처리과정과%20IO/1.1.5%20옵티마이저%20힌트/sql/04_practice.sql)의 문제를 읽고, 예시 SQL을 별도 워크시트에서 직접 수정해 실험합니다.
+5. [sql/05_answer.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/01%20SQL%20처리과정과%20IO/1.1.5%20옵티마이저%20힌트/sql/05_answer.sql)을 실행하며 내 답과 힌트 반영 결과를 비교합니다.
 
 ## 관찰 포인트
 

@@ -94,7 +94,7 @@ SQLP 학습자는 보통 아래 질문으로 시작합니다.
 
 ### 학습 흐름이 선명함
 
-`01_setup.sql -> 02_baseline -> 03_comparison -> 04_practice` 구조는 복습이 쉽고 반복 학습에도 강합니다.
+`01_setup.sql -> 02_baseline -> 03_comparison -> 04_practice -> 05_answer` 구조는 복습이 쉽고 반복 학습에도 강합니다.
 
 ### SQL 파일이 곧 실습 가이드
 
@@ -115,6 +115,7 @@ SQLP 학습자는 보통 아래 질문으로 시작합니다.
 ├─ 02_baseline.sql
 ├─ 03_comparison.sql
 ├─ 04_practice.sql
+├─ 05_answer.sql
 └─ 99_cleanup.sql
 ```
 

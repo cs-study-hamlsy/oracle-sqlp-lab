@@ -19,7 +19,7 @@
 - 교재 정체성을 유지하기 위해 새 실습은 해당 교재 폴더 안에 배치한다.
 - 권장 구조는 `교재 폴더/파트 폴더/주제 폴더/README.md + sql/` 이다.
 - SQL 파일은 보통 주제 폴더 안의 `sql/` 디렉터리에 두고, 실행 순서가 보이게 번호를 붙인다.
-- 기본 파일 구성은 `README.md`, `sql/01_setup.sql`, `sql/02_baseline.sql`, `sql/03_comparison.sql`, `sql/04_practice.sql`, 필요 시 `sql/99_cleanup.sql` 이다.
+- 기본 파일 구성은 `README.md`, `sql/01_setup.sql`, `sql/02_baseline.sql`, `sql/03_comparison.sql`, `sql/04_practice.sql`, `sql/05_answer.sql`, 필요 시 `sql/99_cleanup.sql` 이다.
 - 각 SQL 파일 상단에는 반드시 `목적`, `체크 포인트`, 필요 시 `예상 해석`을 주석으로 남긴다.
 - `common/`은 참고 자산이다. 새 실습은 가능하면 `run.ps1`, 컴파일러, Pro*C 전처리 없이 SQL만으로 재현 가능하게 작성한다.
 

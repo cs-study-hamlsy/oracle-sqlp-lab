@@ -55,14 +55,16 @@ oracle-sqlp-lab/
          ├─ 02_baseline.sql
          ├─ 03_comparison.sql
          ├─ 04_practice.sql
+         ├─ 05_answer.sql
          └─ 99_cleanup.sql
 ```
 
 ## 학습 운영 방식
 
 - `sql/01_setup.sql`부터 번호 순서대로 실행합니다.
-- `01_`, `02_`, `03_`, `99_` 파일은 SQL Developer에서 `F5`로 파일 전체 실행하는 것을 권장합니다.
-- `04_practice.sql`은 문제를 읽고 예시 SQL을 복사해 직접 바꿔가며 실험합니다.
+- `01_`, `02_`, `03_`, `05_`, `99_` 파일은 SQL Developer에서 `F5`로 파일 전체 실행하는 것을 권장합니다.
+- `04_practice.sql`은 문제를 읽고 예시 SQL을 복사해 직접 바꿔가며 먼저 풀어봅니다.
+- `05_answer.sql`은 `04_practice.sql`을 풀어본 뒤 정답 SQL과 실행계획 차이를 비교하는 해설용 스크립트입니다.
 - README는 개념과 해석 가이드, SQL 파일은 실행 가능한 실습 노트 역할을 합니다.
 
 ## DBA / SQLP 관점 기준
