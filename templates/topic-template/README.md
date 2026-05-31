@@ -42,6 +42,7 @@
 ## 실습 파일 구성
 
 - `sql/01_setup.sql`
+  - 현재 접속 계정에서 바로 실행 가능해야 하며, 가능하면 외부 샘플 스키마에 의존하지 않는다.
 - `sql/02_baseline.sql`
 - `sql/03_comparison.sql`
 - `sql/04_practice.sql`
@@ -78,9 +79,17 @@
 - 필요 권한:
 - 전제 오브젝트:
 
+### 작성 원칙
+
+- 특별한 이유가 없으면 `SCOTT.EMP` 같은 외부 샘플 스키마를 전제로 하지 않는다.
+- 새 실습은 가능하면 현재 접속 계정만으로 재현 가능해야 하며, `sql/01_setup.sql` 하나로 준비가 끝나야 한다.
+- 샘플 데이터가 필요하면 인라인 데이터, `dual`, `connect by level` 등 SQL-only 방식으로 준비한다.
+- 부득이하게 외부 오브젝트가 필요하면 README와 `sql/01_setup.sql` 상단 주석에 계정, 권한, 오브젝트명을 명시한다.
+
 ## SQL Developer 실행 가이드
 
 - `sql/01_setup.sql`, `sql/02_*.sql`, `sql/03_*.sql`, `sql/05_answer.sql`, `sql/99_cleanup.sql`은 보통 `F5`로 파일 전체 실행한다.
+- `sql/01_setup.sql`은 실행 직후 데이터 준비가 정상인지 확인할 수 있는 검증 조회 결과를 반드시 출력하도록 작성한다.
 - `sql/04_practice.sql`은 문제 안내용이므로, 예시 SQL을 복사해 별도 워크시트에서 수정하며 먼저 실험한다.
 - `sql/05_answer.sql`은 직접 풀어본 뒤 비교하는 정답 스크립트이므로, 내 실행계획과 차이를 확인하는 용도로 사용한다.
 

@@ -123,6 +123,7 @@ B*Tree 인덱스는 루트, 브랜치, 리프 블록으로 구성된다.
 
 - [sql/01_setup.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.3.1%20Index%20Range%20Scan/sql/01_setup.sql)
   - 실습용 테이블과 인덱스를 생성하고 통계정보를 수집한다.
+  - `SCOTT.EMP` 없이도 현재 접속 계정에서 바로 실행되도록 인라인 샘플 데이터를 사용한다.
 - [sql/02_baseline.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.3.1%20Index%20Range%20Scan/sql/02_baseline.sql)
   - 전형적인 `INDEX RANGE SCAN`과 `TABLE ACCESS BY INDEX ROWID` 조합을 확인한다.
 - [sql/03_comparison.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.3.1%20Index%20Range%20Scan/sql/03_comparison.sql)
@@ -137,10 +138,16 @@ B*Tree 인덱스는 루트, 브랜치, 리프 블록으로 구성된다.
 ## SQL Developer 실행 가이드
 
 1. [sql/01_setup.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.3.1%20Index%20Range%20Scan/sql/01_setup.sql)을 `F5`로 실행한다.
+   실행 직후 `DEPTNO`별 건수와 `MIN/MAX EMPNO`가 출력되면 데이터 준비가 끝난 것이다.
 2. [sql/02_baseline.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.3.1%20Index%20Range%20Scan/sql/02_baseline.sql)에서 `INDEX RANGE SCAN`, `TABLE ACCESS BY INDEX ROWID`, `Predicate Information`을 확인한다.
 3. [sql/03_comparison.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.3.1%20Index%20Range%20Scan/sql/03_comparison.sql)으로 읽는 범위 차이를 비교한다.
 4. [sql/04_practice.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.3.1%20Index%20Range%20Scan/sql/04_practice.sql)에서 직접 계획을 예측한다.
 5. [sql/05_answer.sql](/C:/oracle-sqlp-lab/친절한%20SQL%20튜닝/02%20인덱스%20기본/2.3.1%20Index%20Range%20Scan/sql/05_answer.sql)로 해설을 확인한다.
+
+### 사전 확인 사항
+
+- 별도 샘플 스키마 설치는 필요 없다. 현재 접속 계정에서 `create table`, `create index`, `dbms_stats.gather_table_stats`가 가능하면 된다.
+- 실습 대상 테이블은 현재 접속 사용자 스키마에 생성된다. 따라서 `SYSTEM`으로 실행하면 `SYSTEM.T_IDX_RANGE_SCAN_DEMO`, 다른 사용자로 실행하면 해당 사용자 스키마에 생성된다.
 
 ## 관찰 결과 해석 포인트
 
